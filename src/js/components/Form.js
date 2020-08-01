@@ -1,36 +1,28 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addProductIncrement } from "../actions/index";
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {addProductIncrement} from "../actions/index";
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addProductIncrement: item => dispatch(addProductIncrement(item))
-  };
-}
-
-class ConnectedForm extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: ""
-    };
+    this.state = {title: "three"};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ [event.target.id]: event.target.value });
+    this.setState({[event.target.id]: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const { title } = this.state;
-    this.props.addProductIncrement({ title });
-    this.setState({ title: "" });
+    const {title} = this.state;
+    this.props.add({title});
+    this.setState({title: ""});
   }
 
   render() {
-    const { title } = this.state;
+    const {title} = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
@@ -48,9 +40,9 @@ class ConnectedForm extends Component {
   }
 }
 
-const Form = connect(
-  null,
-  mapDispatchToProps
-)(ConnectedForm);
+const dispatchToProps = dispatch => ({
+  add: item => dispatch(addProductIncrement(item))
+});
 
-export default Form;
+export default connect(null, dispatchToProps)(Form);
+

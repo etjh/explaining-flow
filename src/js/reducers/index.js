@@ -1,12 +1,14 @@
+import Board from "../domain/board";
+
 const initialState = {
-  items: []
+  board: Board([{title: 'one'}, {title: 'two'}])
 };
 
 function rootReducer(state = initialState, action) {
   if (action.type === 'ADD_PRODUCT_INCREMENT') {
     return {
       ...state,
-      items: state.items.concat({ id: state.items.length, title: action.payload.title})
+      board: state.board.addStory(action.payload)
     };
   }
   return state;
