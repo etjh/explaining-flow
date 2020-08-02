@@ -1,7 +1,6 @@
 import rootReducer from "../index";
-import Board from "../../domain/board";
 import {addStory} from "../../actions";
-import Column from "../../domain/column";
+import {Board, Column} from "../../domain/";
 
 describe('adding a story', () => {
   it('should show in the todo column', function () {

@@ -1,6 +1,5 @@
 import Board from "../domain/board";
-import Column from "../domain/column";
-import Story from "../domain/story";
+import {Column, Story} from "../domain/";
 
 const initialState = {
   board: Board([

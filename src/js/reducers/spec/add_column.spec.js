@@ -1,5 +1,5 @@
 import rootReducer from "../index";
-import Board from "../../domain/board";
+import {Board} from "../../domain/";
 import {addColumn} from "../../actions";
 
 describe('adding a column', () => {
