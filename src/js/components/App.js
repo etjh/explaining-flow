@@ -1,15 +1,16 @@
 import React from "react";
-import List from "./List";
 import Board from "./Board";
-import AddStory from "./AddStory";
-import AddColumn from "./AddColumn";
+import AddStory from "../actions/AddStory";
+import AddColumn from "../actions/AddColumn";
+import './App.css'
 
 const App = () => (
   <>
     <div>
-      <h2>Articles</h2>
-      <Board/>
-      <List/>
+      <h1>Board</h1>
+      <div className={"dd"}>
+        <Board/>
+      </div>
     </div>
     <div>
       <h2>Add Story</h2>

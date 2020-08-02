@@ -1,0 +1,11 @@
+Body {
+    font-family: Sans-serif;
+    font-size: 14px;
+    width: 100%;
+    background-color: #E0E0E0;
+}
+
+ol {
+    transition: border-color 2s ease, all 0.1s ease;
+}
+
