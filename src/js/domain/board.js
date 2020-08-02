@@ -1,15 +1,20 @@
-import {Column} from "./column";
+import Column from "./column";
 
-const Board = (columns = [Column('to do')]) => {
-  const todo = columns[0];
+const Board = (columns = []) => {
+  const [todo, ...otherColumns] = columns
   const addStory = (title) => {
-    return Board([todo.addStory(title)])
+    let newStory = todo.addStory(title);
+    let newColumns = [newStory, ...otherColumns];
+    let newBoard = Board(newColumns);
+    return newBoard;
   };
+  const addColumn = (name) => Board([...columns, Column(name)]);
 
   return {
     addStory,
+    addColumn,
 
-    columns: [todo],
+    columns,
   }
 };
 

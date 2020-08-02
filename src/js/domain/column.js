@@ -1,6 +1,6 @@
 import Story from "./story";
 
-export function Column(name, work = []) {
+const Column = (name, work = []) => {
   const addStory = (storyTitle) => {
     return Column(name, [...work, Story(storyTitle)])
   };
@@ -11,4 +11,6 @@ export function Column(name, work = []) {
     name,
     work
   };
-}
+};
+
+export default Column

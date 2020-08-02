@@ -1,7 +1,11 @@
 import Board from "../domain/board";
+import Column from "../domain/column";
 
+let board = Board([Column('to do')]);
+let board1 = board.addStory('one');
+let board2 = board1.addStory('two');
 const initialState = {
-  board: Board().addStory('one').addStory('two')
+  board: board2
 };
 
 function rootReducer(state = initialState, action) {
@@ -9,6 +13,12 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       board: state.board.addStory(action.payload.title)
+    };
+  }
+  if (action.type === 'ADD_COLUMN') {
+    return {
+      ...state,
+      board: state.board.addColumn(action.payload.name)
     };
   }
   return state;

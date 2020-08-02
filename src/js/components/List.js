@@ -13,8 +13,8 @@ const List = ({column}) => {
   );
 };
 
-const stateToProps = state => {
-  console.log(state)
+const stateToProps = (state, a, b, c) => {
+  console.log({type:'List', state, a, b, c})
   return {column: state.board.columns[0]};
 };
 
