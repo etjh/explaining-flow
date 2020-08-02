@@ -1,24 +1,22 @@
 import React from "react";
 import Board from "./Board";
-import AddStory from "../actions/AddStory";
-import AddColumn from "../actions/AddColumn";
+import AddStory from "./AddStory";
+import AddColumn from "./AddColumn";
 import './App.css'
 
 const App = () => (
   <>
-    <div>
-      <h1>Board</h1>
-      <div className={"dd"}>
-        <Board/>
-      </div>
-    </div>
-    <div>
+    <span>
       <h2>Add Story</h2>
       <AddStory/>
-    </div>
-    <div>
+    </span>
+    <span>
       <h2>Add Column</h2>
       <AddColumn/>
+    </span>
+    <div>
+      <h2>Board</h2>
+      <Board/>
     </div>
   </>
 );

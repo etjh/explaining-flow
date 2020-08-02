@@ -3,9 +3,9 @@ import {Column, Story} from "../domain/";
 
 const initialState = {
   board: Board([
-    Column('to do', [Story('one'), Story('two')]),
-    Column('doing', []),
-    Column('done', [])
+    Column('To-do', [Story('one'), Story('two')]),
+    Column('Progress', []),
+    Column('Done', [])
   ])
 };
 

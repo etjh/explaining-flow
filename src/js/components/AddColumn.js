@@ -1,11 +1,12 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {addStory} from "./index";
+import {addStory} from "../actions";
+import {addColumn} from "../actions";
 
-class AddStory extends Component {
+class AddColumn extends Component {
   constructor(props) {
     super(props);
-    this.state = {title: "three"};
+    this.state = {name: "wip"};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -16,21 +17,21 @@ class AddStory extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const {title} = this.state;
-    this.props.add({title});
-    this.setState({title: ""});
+    const {name} = this.state;
+    this.props.add({name});
+    this.setState({name: ""});
   }
 
   render() {
-    const {title} = this.state;
+    const {name} = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
           <label htmlFor="title">Title</label>
           <input
             type="text"
-            id="title"
-            value={title}
+            id="name"
+            value={name}
             onChange={this.handleChange}
           />
         </div>
@@ -41,8 +42,8 @@ class AddStory extends Component {
 }
 
 const dispatchToProps = dispatch => ({
-  add: title => dispatch(addStory(title))
+  add: name => dispatch(addColumn(name))
 });
 
-export default connect(null, dispatchToProps)(AddStory);
+export default connect(null, dispatchToProps)(AddColumn);
 
