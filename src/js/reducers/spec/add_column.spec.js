@@ -9,7 +9,7 @@ describe('adding a column', () => {
       addColumn({name: 'column 1'})
     );
     expect(board.columns).toMatchObject([
-      {name: 'column 1', work: []}
+      {name: 'column 1', work: [], wip: 0}
     ])
   });
 });

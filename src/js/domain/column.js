@@ -9,7 +9,8 @@ const Column = (name, work = []) => {
     addStory,
 
     name,
-    work
+    work,
+    wip: work.length
   };
 };
 

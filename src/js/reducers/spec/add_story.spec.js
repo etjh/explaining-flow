@@ -9,7 +9,7 @@ describe('adding a story', () => {
       addStory({title: 'story 1'})
     );
     expect(board.columns).toMatchObject([
-      {name: 'to do', work: [{title: 'story 1'}]}
+      {name: 'to do', work: [{title: 'story 1'}], wip: 1}
     ])
   });
 });

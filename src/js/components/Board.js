@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-const Column = ({column}) => <li key={column.id}>{column.name}</li>
+const Column = ({column}) => <li key={column.id}>{`${column.name} (${column.wip})`}</li>
 
 const Board = ({board}) =>
   (

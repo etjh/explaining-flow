@@ -1,7 +1,8 @@
 import React from "react";
 import List from "./List";
-import Form from "./Form";
 import Board from "./Board";
+import AddStory from "./AddStory";
+import AddColumn from "./AddColumn";
 
 const App = () => (
   <>
@@ -11,8 +12,12 @@ const App = () => (
       <List/>
     </div>
     <div>
-      <h2>Add a new article</h2>
-      <Form/>
+      <h2>Add Story</h2>
+      <AddStory/>
+    </div>
+    <div>
+      <h2>Add Column</h2>
+      <AddColumn/>
     </div>
   </>
 );

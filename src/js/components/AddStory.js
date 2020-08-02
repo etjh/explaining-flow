@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {addStory} from "../actions/index";
 
-class Form extends Component {
+class AddStory extends Component {
   constructor(props) {
     super(props);
     this.state = {title: "three"};
@@ -41,8 +41,8 @@ class Form extends Component {
 }
 
 const dispatchToProps = dispatch => ({
-  add: item => dispatch(addStory(item))
+  add: title => dispatch(addStory(title))
 });
 
-export default connect(null, dispatchToProps)(Form);
+export default connect(null, dispatchToProps)(AddStory);
 
