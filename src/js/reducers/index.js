@@ -1,7 +1,8 @@
 import Board from "../domain/board";
+import Story from "../domain/story";
 
 const initialState = {
-  board: Board([{title: 'one'}, {title: 'two'}])
+  board: Board([Story('one'), Story('two')])
 };
 
 function rootReducer(state = initialState, action) {

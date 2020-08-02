@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {addProductIncrement} from "../actions/index";
+import {addStory} from "../actions/index";
 
 class Form extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Form extends Component {
 }
 
 const dispatchToProps = dispatch => ({
-  add: item => dispatch(addProductIncrement(item))
+  add: item => dispatch(addStory(item))
 });
 
 export default connect(null, dispatchToProps)(Form);

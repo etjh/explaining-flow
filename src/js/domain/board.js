@@ -1,11 +1,15 @@
+import Story from "./story";
+
 const Board = (stories = []) => {
-  const addStory = ({title}) => {
-    return Board([...stories, {id: 1, title}])
+  const todo = {name: 'to do', work: stories}
+  const addStory = (data) => {
+    return Board([...stories, Story(data)])
   };
 
   return {
     addStory,
 
+    columns: [todo],
     stories: [...stories]
   }
 };
