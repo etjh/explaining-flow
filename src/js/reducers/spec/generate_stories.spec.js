@@ -2,8 +2,8 @@ import rootReducer from "../index";
 import {generateStories} from "../../actions";
 import {Board, Column} from "../../domain/";
 
-describe('adding a story', () => {
-  it('should show in the todo column', function () {
+describe('generate stories', () => {
+  it('should show in the todo column', () => {
     const {board} = rootReducer(
       {board: Board([Column('to do')])},
       generateStories({numberOfStories: '3'})

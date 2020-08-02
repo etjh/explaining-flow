@@ -27,7 +27,7 @@ class AddColumn extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             id="name"

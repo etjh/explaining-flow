@@ -22,6 +22,12 @@ function rootReducer(state = initialState, action) {
       board: state.board.addColumn(action.payload.name)
     };
   }
+  if (action.type === 'DO_WORK') {
+    return {
+      ...state,
+      board: state.board.doWork()
+    };
+  }
   return state;
 }
 

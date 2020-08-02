@@ -3,6 +3,7 @@ import Board from "./Board";
 import GenerateStories from "./GenerateStories";
 import AddColumn from "./AddColumn";
 import './App.css'
+import Work from "./Work";
 
 const App = () => (
   <>
@@ -13,6 +14,10 @@ const App = () => (
     <span>
       <h2>Add Column</h2>
       <AddColumn/>
+    </span>
+    <span>
+      <h2>Work</h2>
+      <Work/>
     </span>
     <div>
       <h2>Board</h2>

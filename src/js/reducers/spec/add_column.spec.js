@@ -3,7 +3,7 @@ import {Board} from "../../domain/";
 import {addColumn} from "../../actions";
 
 describe('adding a column', () => {
-  it('should show the new column', function () {
+  it('should show the new column', () => {
     const {board} = rootReducer(
       {board: Board([])},
       addColumn({name: 'column 1'})

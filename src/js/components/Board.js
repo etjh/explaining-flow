@@ -1,27 +1,20 @@
 import React from "react";
 import {connect} from "react-redux";
 
-const Story = (story) => <li className={'dd-item'} key={story.id}/>;
+const Story = (story) => <li className={'dd-item'} key={story.id}>{story.id}</li>;
 
 const maxStoriesToShow = 8
 const List = ({work}) => {
   if (work.length <= maxStoriesToShow) {
     return (
-      <>
-        {
-          work.map(Story)
-        }
-
-      </>
+      <>{work.map(Story)}</>
     );
   } else {
     return (
-      <>
-        {[
-          ...work.map(Story).slice(0, maxStoriesToShow),
-          <li className={'dd-item more'}>...</li>
-        ]}
-      </>
+      <>{[
+        ...work.slice(0, maxStoriesToShow).map(Story),
+        <li className={'dd-item more'}>...</li>
+      ]}</>
     );
 
   }
