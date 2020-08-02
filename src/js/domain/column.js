@@ -1,12 +1,15 @@
 import Story from "./story";
 
 const Column = (name, work = []) => {
-  const addStory = (storyTitle) => {
-    return Column(name, [...work, Story(storyTitle)])
+  const generateStories = (numberOfStories) => {
+    const newItems = Array.apply(null, Array(numberOfStories)).map(Story);
+    return Column(name, [
+      ...newItems
+    ])
   };
 
   return {
-    addStory,
+    generateStories,
 
     name,
     work,

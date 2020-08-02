@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {addStory} from "../actions";
+import {generateStories} from "../actions";
 import {addColumn} from "../actions";
 
 class AddColumn extends Component {

@@ -3,17 +3,17 @@ import {Column, Story} from "../domain/";
 
 const initialState = {
   board: Board([
-    Column('To-do', [Story('one'), Story('two')]),
-    Column('Progress', []),
-    Column('Done', [])
-  ])
+    Column('To-do'),
+    Column('Progress'),
+    Column('Done')
+  ]).generateStories(8)
 };
 
 function rootReducer(state = initialState, action) {
-  if (action.type === 'ADD_PRODUCT_INCREMENT') {
+  if (action.type === 'GENERATE_STORIES') {
     return {
       ...state,
-      board: state.board.addStory(action.payload.title)
+      board: state.board.generateStories(parseInt(action.payload.numberOfStories))
     };
   }
   if (action.type === 'ADD_COLUMN') {

@@ -1,5 +1,5 @@
 import store from "../js/store/index";
-import { addStory } from "../js/actions/index";
+import { generateStories } from "../js/actions/index";
 
 window.store = store;
-window.addProductIncrement = addStory;
+window.addProductIncrement = generateStories;

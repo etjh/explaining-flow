@@ -1,14 +1,14 @@
 import React from "react";
 import Board from "./Board";
-import AddStory from "./AddStory";
+import GenerateStories from "./GenerateStories";
 import AddColumn from "./AddColumn";
 import './App.css'
 
 const App = () => (
   <>
     <span>
-      <h2>Add Story</h2>
-      <AddStory/>
+      <h2>Generate stories</h2>
+      <GenerateStories/>
     </span>
     <span>
       <h2>Add Column</h2>

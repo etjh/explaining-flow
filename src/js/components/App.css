@@ -89,10 +89,10 @@ h2 .material-icons {
     padding: 5px 16px;
 }
 
-button>.material-icons {
+button > .material-icons {
     line-height: 0.2;
-    position:relative;
-    top:7px;
+    position: relative;
+    top: 7px;
 }
 
 .dd-item:hover,
@@ -113,7 +113,11 @@ button.addbutt {
     max-width: 330px;
 }
 
-button:active, button:focus {box-shadow: 0 0 0 0, 0 0 0 0 rgba(0, 0, 0, .2), 0 0 0 0 rgba(0, 0, 0, .12);color:#00838F;}
+button:active, button:focus {
+    box-shadow: 0 0 0 0, 0 0 0 0 rgba(0, 0, 0, .2), 0 0 0 0 rgba(0, 0, 0, .12);
+    color: #00838F;
+}
+
 button {
     align-items: center;
     background-color: #EEEEEE;
@@ -189,6 +193,13 @@ ol.kanban {
     background: #fff;
     border-radius: 2px;
     box-sizing: border-box;
+}
+
+.dd-item.more {
+    border: none;
+    min-height: 0px;
+    /*font-size: 8px;*/
+    background-color: #fff;
 }
 
 .title {
