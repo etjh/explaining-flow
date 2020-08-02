@@ -1,11 +1,13 @@
 import Board from "../domain/board";
 import Column from "../domain/column";
+import Story from "../domain/story";
 
-let board = Board([Column('to do')]);
-let board1 = board.addStory('one');
-let board2 = board1.addStory('two');
 const initialState = {
-  board: board2
+  board: Board([
+    Column('to do', [Story('one'), Story('two')]),
+    Column('doing', []),
+    Column('done', [])
+  ])
 };
 
 function rootReducer(state = initialState, action) {

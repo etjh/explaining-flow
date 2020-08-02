@@ -5,7 +5,7 @@ import {addColumn} from "../../actions";
 describe('adding a column', () => {
   it('should show the new column', function () {
     const {board} = rootReducer(
-      {board: Board()},
+      {board: Board([])},
       addColumn({name: 'column 1'})
     );
     expect(board.columns).toMatchObject([
