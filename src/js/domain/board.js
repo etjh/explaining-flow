@@ -1,16 +1,15 @@
-import Story from "./story";
+import {Column} from "./column";
 
-const Board = (stories = []) => {
-  const todo = {name: 'to do', work: stories}
-  const addStory = (data) => {
-    return Board([...stories, Story(data)])
+const Board = (columns = [Column('to do')]) => {
+  const todo = columns[0];
+  const addStory = (title) => {
+    return Board([todo.addStory(title)])
   };
 
   return {
     addStory,
 
     columns: [todo],
-    stories: [...stories]
   }
 };
 
