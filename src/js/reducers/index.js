@@ -1,7 +1,9 @@
 import Board from "../domain/board";
-import {Column, Story} from "../domain/";
+import {Column} from "../domain/";
+import tick from "../domain/tick";
 
 const initialState = {
+  lastUpdate: Date.now(),
   board: Board([
     Column('To-do'),
     Column('Progress'),
@@ -9,7 +11,7 @@ const initialState = {
   ]).generateStories(8)
 };
 
-function rootReducer(state = initialState, action) {
+const rootReducer = (state = initialState, action) => {
   if (action.type === 'GENERATE_STORIES') {
     return {
       ...state,
@@ -22,13 +24,10 @@ function rootReducer(state = initialState, action) {
       board: state.board.addColumn(action.payload.name)
     };
   }
-  if (action.type === 'DO_WORK') {
-    return {
-      ...state,
-      board: state.board.doWork()
-    };
+  if (action.type === 'TICK') {
+    return tick(state)
   }
   return state;
-}
+};
 
 export default rootReducer;

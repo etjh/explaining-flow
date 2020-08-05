@@ -1,19 +1,19 @@
 import rootReducer from "../index";
 import {Board, Column, Story} from "../../domain";
-import {doWork} from "../../actions";
+import {tick} from "../../actions";
 
 describe('work', () => {
   it('should finish one story', () => {
-    const {board} = rootReducer(
-      {board: Board([
-          Column('todo', [Story()]),
-          Column('wip'),
-          Column('done')
-        ])},
-      doWork()
-    );
+    let initialState = {
+      board: Board([
+        Column('todo', [Story()]),
+        Column('wip'),
+        Column('done')
+      ])
+    };
+    const state = rootReducer(initialState, tick());
 
-    expect(board.columns).toMatchObject([
+    expect(state.board.columns).toMatchObject([
       {name: 'todo', wip: 0, work: []},
       {name: 'wip', wip: 1, work: [{}]},
       {name: 'done', wip: 0, work: []}
