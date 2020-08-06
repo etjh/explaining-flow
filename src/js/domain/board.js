@@ -11,13 +11,17 @@ const Board = (columns = []) => {
   const addColumn = (name) => Board([...columns, Column(name)]);
 
   function move(column, column2) {
-    const story = column.work[0];
-    return [column.take(), column2.add(story)];
   }
 
   const doWork = () => {
-    const newCols = move(columns[0], columns[1])
-    return Board([...newCols, ...columns.slice(2)])
+    if (columns[1].wip > 0) {
+      const story = columns[1].work[0];
+      return Board([columns[0], columns[1].take(), columns[2].add(story)])
+    } else if(columns[0].wip > 0) {
+      const story = columns[0].work[0];
+      return Board([columns[0].take(), columns[1].add(story), columns[2]])
+    }
+    return Board([columns[0], columns[1], columns[2]])
   };
 
   return {
