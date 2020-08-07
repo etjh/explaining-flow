@@ -10,7 +10,7 @@ const Column = (name, work = []) => {
 
   return {
     generateStories,
-    take: () => Column(name, work.slice(1)),
+    take: () => [Column(name, work.slice(1)), work[0]],
     add: item => Column(name, [...work, item]),
 
     name,

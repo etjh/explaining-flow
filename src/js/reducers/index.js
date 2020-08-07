@@ -1,31 +1,36 @@
-import Board from "../domain/board";
-import {Column} from "../domain/";
 import tick from "../domain/tick";
 
-const initialState = {
-  lastUpdate: Date.now(),
-  board: Board([
-    Column('To-do'),
-    Column('Progress'),
-    Column('Done')
-  ]).generateStories(8)
-};
+const initialState = {};
 
 const rootReducer = (state = initialState, action) => {
-  if (action.type === 'GENERATE_STORIES') {
+  if (action.type === 'CREATE_BOARD') {
     return {
       ...state,
-      board: state.board.generateStories(parseInt(action.payload.numberOfStories))
-    };
+      columns: [
+        {name: 'todo', wip: 0, work: []},
+        {name: 'dev', wip: 0, work: []},
+        {name: 'done', wip: 0, work: []}
+      ],
+      lastUpdate: Date.now()
+    }
   }
-  if (action.type === 'ADD_COLUMN') {
+  if (action.type === 'CREATE_WORKERS') {
+    return {
+      ...state
+    }
+  }
+  if (action.type === 'ADD_STORY') {
     return {
       ...state,
-      board: state.board.addColumn(action.payload.name)
-    };
+      columns: [
+        {name: 'todo', wip: 1, work: [{}]},
+        {name: 'dev', wip: 0, work: []},
+        {name: 'done', wip: 0, work: []}
+      ]
+    }
   }
   if (action.type === 'TICK') {
-    return tick(state)
+    return tick(state, action.payload)
   }
   return state;
 };

@@ -1,38 +1,46 @@
 import rootReducer from "../index";
-import {Board, Column, Story} from "../../domain";
-import {tick} from "../../actions";
+import _ from 'lodash'
+import {addStory, createBoard, createWorkers, tick} from "../../actions";
+import { advanceBy } from 'jest-date-mock';
 
 describe('work', () => {
-  it('should start one story', () => {
-    let initialState = {
-      board: Board([
-        Column('todo', [Story()]),
-        Column('wip'),
-        Column('done')
-      ])
-    };
-    const state = rootReducer(initialState, tick());
+  let initialState = undefined;
 
-    expect(state.board.columns).toMatchObject([
-      {name: 'todo', wip: 0, work: []},
-      {name: 'wip', wip: 1, work: [{}]},
+  beforeEach(() => {
+    initialState = _.flow([
+      s => rootReducer(s, createBoard(['dev'])),
+      s => rootReducer(s, createWorkers([{'dev': 1}])),
+      s => rootReducer(s, addStory({'dev': 1}))
+    ])({})
+  });
+
+  it('sets the initial state', () => {
+    expect(initialState.columns).toMatchObject([
+      {name: 'todo', wip: 1, work: [{}]},
+      {name: 'dev' , wip: 0, work: []},
       {name: 'done', wip: 0, work: []}
     ])
   });
-  it('should finish one story', () => {
-    let initialState = {
-      board: Board([
-        Column('todo'),
-        Column('wip', [Story()]),
-        Column('done')
-      ])
-    };
-    const state = rootReducer(initialState, tick());
 
-    expect(state.board.columns).toMatchObject([
-      {name: 'todo', wip: 0, work: []},
-      {name: 'wip', wip: 0, work: []},
-      {name: 'done', wip: 1, work: [{}]}
+  it('start the simulation', () => {
+    advanceBy(100);
+    const state = rootReducer(initialState, tick())
+    expect(state.columns).toMatchObject([
+      {wip: 0, work: []},
+      {wip: 1, work: [{}]},
+      {wip: 0, work: []}
     ])
+    expect(state).toMatchObject({running: true})
+  });
+
+  it('end the simulation', () => {
+    advanceBy(1000);
+    const state = rootReducer(initialState, tick())
+    expect(state.columns).toMatchObject([
+      {wip: 0, work: []},
+      {wip: 0, work: []},
+      {wip: 1, work: [{}]}
+    ])
+    expect(state).toMatchObject({running: false})
   });
 });
