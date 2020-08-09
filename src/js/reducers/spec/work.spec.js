@@ -7,11 +7,11 @@ describe('work', () => {
   let initialState = undefined;
 
   beforeEach(() => {
-    initialState = _.flow([
-      s => rootReducer(s, createBoard(['dev'])),
-      s => rootReducer(s, createWorkers([{'dev': 1}])),
-      s => rootReducer(s, addStory({'dev': 1}))
-    ])({})
+      initialState = _.flow([
+        s => rootReducer(s, createBoard(['dev'])),
+        s => rootReducer(s, createWorkers([{'dev': 1}])),
+        s => rootReducer(s, addStory({'dev': 1000}))
+      ])({})
   });
 
   it('sets the initial state', () => {
@@ -23,8 +23,17 @@ describe('work', () => {
   });
 
   it('start the simulation', () => {
-    advanceBy(100);
-    const state = rootReducer(initialState, tick())
+    const state = rootReducer(initialState, tick(0))
+    expect(state.columns).toMatchObject([
+      {wip: 0, work: []},
+      {wip: 1, work: [{}]},
+      {wip: 0, work: []}
+    ])
+    expect(state).toMatchObject({running: true})
+  });
+
+  it('almost done', () => {
+    const state = rootReducer(initialState, tick(999))
     expect(state.columns).toMatchObject([
       {wip: 0, work: []},
       {wip: 1, work: [{}]},
@@ -34,8 +43,7 @@ describe('work', () => {
   });
 
   it('end the simulation', () => {
-    advanceBy(1000);
-    const state = rootReducer(initialState, tick())
+    const state = rootReducer(initialState, tick(1000))
     expect(state.columns).toMatchObject([
       {wip: 0, work: []},
       {wip: 0, work: []},

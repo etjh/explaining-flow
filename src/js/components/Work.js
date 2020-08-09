@@ -1,38 +1,44 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {tick} from "../actions";
+import {start, stop, tick} from "../actions";
 
 class Work extends Component {
   constructor(props) {
     super(props);
-    this.atRest = true
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.atRest)
-      this.timerHandle = setInterval(this.props.tick, 1000)
-    else
-      clearInterval(this.timerHandle)
-
-    this.atRest = !this.atRest
+    this.props.running
+      ? this.props.stop()
+      : this.props.start()
   }
 
   render() {
     return (
       <>
         <form onSubmit={this.handleSubmit}>
-          <button type="submit">TOGGLE</button>
+          <button type="submit">{this.props.running ? 'STOP' : 'START'}</button>
         </form>
       </>
     );
   }
 }
 
-const dispatchToProps = dispatch => ({
-  tick: () => dispatch(tick())
+const stateToProps = state => ({
+  columns: state.columns,
+  running: state.timer?.running
 });
 
-export default connect(null, dispatchToProps)(Work);
+const dispatchToProps = dispatch => {
+  let startPayload = {tick: () => dispatch(tick())};
+  return ({
+    start: () => dispatch(start(startPayload)),
+    stop: () => dispatch(stop())
+  });
+};
+
+export default connect(stateToProps, dispatchToProps)(Work);
 
