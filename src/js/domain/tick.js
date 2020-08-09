@@ -1,6 +1,5 @@
 const tick = (state, payload) => {
-  const now = Date.now()
-  const delta = now - state.timer.previousTime;
+  const delta = payload.delta;
 
   let work = state.work + delta;
 
@@ -12,7 +11,6 @@ const tick = (state, payload) => {
         {name: 'dev', wip: 1, work: [{id: 1}]},
         {name: 'done', wip: 0, work: []}
       ],
-      running: true,
       work
     };
   } else {
@@ -23,7 +21,6 @@ const tick = (state, payload) => {
         {name: 'dev', wip: 0, work: []},
         {name: 'done', wip: 1, work: [{id: 1}]}
       ],
-      running: false,
       work
     };
 

@@ -1,7 +1,6 @@
 import rootReducer from "../index";
 import _ from 'lodash'
 import {addStory, createBoard, createWorkers, tick} from "../../actions";
-import { advanceBy } from 'jest-date-mock';
 
 describe('work', () => {
   let initialState = undefined;
@@ -29,7 +28,6 @@ describe('work', () => {
       {wip: 1, work: [{}]},
       {wip: 0, work: []}
     ])
-    expect(state).toMatchObject({running: true})
   });
 
   it('almost done', () => {
@@ -39,7 +37,6 @@ describe('work', () => {
       {wip: 1, work: [{}]},
       {wip: 0, work: []}
     ])
-    expect(state).toMatchObject({running: true})
   });
 
   it('end the simulation', () => {
@@ -49,6 +46,5 @@ describe('work', () => {
       {wip: 0, work: []},
       {wip: 1, work: [{}]}
     ])
-    expect(state).toMatchObject({running: false})
   });
 });

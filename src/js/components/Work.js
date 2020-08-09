@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {start, stop, tick} from "../actions";
+import {start, stop} from "../actions";
+import Timer from "../domain/timer";
 
 class Work extends Component {
   constructor(props) {
@@ -33,9 +34,8 @@ const stateToProps = state => ({
 });
 
 const dispatchToProps = dispatch => {
-  let startPayload = {tick: () => dispatch(tick())};
   return ({
-    start: () => dispatch(start(startPayload)),
+    start: () => dispatch(start(Timer(dispatch))),
     stop: () => dispatch(stop())
   });
 };

@@ -9,8 +9,6 @@ const initialState = _.flow([
   ])
 
 const rootReducer = (state = initialState({}), action) => {
-  console.log({state, action, type: action.type, running: state.running})
-
   if (action.type === 'CREATE_BOARD') {
     return {
       ...state,
@@ -41,32 +39,26 @@ const rootReducer = (state = initialState({}), action) => {
   }
 
   if (action.type === 'START') {
-    let newState = {
+    return {
       ...state,
       timer: {
         running: true,
-        previousTime: Date.now(),
-        handle: setInterval(action.payload.tick, 100)
-      }};
-    console.log({newState})
-    return newState
+        handle: action.payload.timer.start()
+      }
+    }
   }
   if (action.type === 'STOP') {
-    let newState = {
+    return {
       ...state,
       timer: {
         ...state.timer,
         running: false,
         handle: clearInterval(state.timer.handle)
       }
-    };
-    console.log({newState})
-    return newState
+    }
   }
   if (action.type === 'TICK') {
-    let newState = tick(state);
-    console.log({newState})
-    return newState
+    return tick(state, action.payload)
   }
 
   return state;
