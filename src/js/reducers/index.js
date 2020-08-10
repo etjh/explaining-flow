@@ -4,8 +4,8 @@ import {addStory, createBoard, createWorkers} from "../actions";
 
 const initialState = _.flow([
     s => rootReducer(s, createBoard(['dev'])),
-    s => rootReducer(s, createWorkers([{'dev': 1}])),
-    s => rootReducer(s, addStory({'dev': 1}))
+    s => rootReducer(s, createWorkers([{'dev': 1000}])),
+    s => rootReducer(s, addStory({'dev': 1000}))
   ])
 
 const rootReducer = (state = initialState({}), action) => {
@@ -31,7 +31,7 @@ const rootReducer = (state = initialState({}), action) => {
     return {
       ...state,
       columns: [
-        {name: 'todo', wip: 1, work: [{id: 1}]},
+        {name: 'todo', wip: 1, work: [{id: 1, 'dev': {total: 1000, done: 0}}]},
         {name: 'dev', wip: 0, work: []},
         {name: 'done', wip: 0, work: []}
       ]
