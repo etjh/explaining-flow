@@ -4,7 +4,7 @@ import {addStory, createBoard, createWorkers} from "../actions";
 
 const initialState = _.flow([
     s => rootReducer(s, createBoard(['dev'])),
-    s => rootReducer(s, createWorkers([{'dev': 1000}])),
+    s => rootReducer(s, createWorkers([{'dev': 1}])),
     s => rootReducer(s, addStory({'dev': 1000}))
   ])
 
@@ -23,15 +23,22 @@ const rootReducer = (state = initialState({}), action) => {
   if (action.type === 'CREATE_WORKERS') {
     return {
       ...state,
-      workers: [{}]
+      workers: action.payload
     }
   }
 
+  let storyCounter = 1
   if (action.type === 'ADD_STORY') {
+    const addWork = column => ({
+      ...column,
+      wip: column.work.length + 1,
+      work: [...column.work, {id: storyCounter++, 'dev': {total: 1000, done: 0}}]
+    });
+
     return {
       ...state,
       columns: [
-        {name: 'todo', wip: 1, work: [{id: 1, 'dev': {total: 1000, done: 0}}]},
+        addWork(state.columns[0]),
         {name: 'dev', wip: 0, work: []},
         {name: 'done', wip: 0, work: []}
       ]
