@@ -10,33 +10,62 @@ const tick = (state, payload) => {
   let busyColumn = state.columns[1]
   let doneColumn = state.columns[2]
 
-  // console.log({story, todoColumn, busyColumn, doneColumn})
+  function log(data) {
+    // console.log(data)
+  }
 
+  log({story, todoColumn, busyColumn, doneColumn});
+
+  // move the story out of the current column
   if (story['dev'].done === 0) {
     // take it out of dev
     todoColumn.work = todoColumn.work.slice(0, -1);
   } else {
     busyColumn.work = busyColumn.work.slice(0, -1);
   }
-  // console.log({story, todoColumn, busyColumn, doneColumn})
+  log({story, todoColumn, busyColumn, doneColumn})
 
-  let updatedStory = {
-    ...story,
-    'dev': {
-      ...story['dev'],
-      done: story['dev'].done + delta * worker['dev']
+  // DO THE WORK
+  let updatedStory = undefined
+  let timeToSpend = delta
+
+  do {
+    let canDo = timeToSpend * worker['dev']
+    let toDo = story['dev'].total - story['dev'].done
+    log({canDo, toDo})
+    if (toDo >= canDo) {
+      updatedStory = {
+        ...story,
+        'dev': {
+          ...story['dev'],
+          done: story['dev'].done + canDo
+        }
+      };
+      timeToSpend = 0;
+    } else {
+      updatedStory = {
+        ...story,
+        'dev': {
+          ...story['dev'],
+          done: story['dev'].total
+        }
+      };
+      timeToSpend -= toDo
     }
-  };
+  } while(timeToSpend > 0)
 
+
+
+  // put the story in the right column
   let devWork = updatedStory['dev'];
   let storyDone = devWork.done >= devWork.total;
-  // console.log({devWork, storyDone})
+  log({devWork, storyDone})
   if (storyDone) {
     doneColumn.work.push(updatedStory)
   } else {
     busyColumn.work.push(updatedStory);
   }
-  // console.log({updatedStory, todoColumn, busyColumn, doneColumn})
+  log({updatedStory, todoColumn, busyColumn, doneColumn})
 
   let work = state.work + delta;
 
