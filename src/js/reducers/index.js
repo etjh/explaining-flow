@@ -1,4 +1,4 @@
-import tick from "../domain/tick";
+import tick from "../domain/extracted";
 import _ from "lodash";
 import {addStory, createBoard, createWorkers} from "../actions";
 

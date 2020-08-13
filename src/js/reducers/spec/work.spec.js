@@ -152,21 +152,21 @@ describe('simple board with one worker, two stories', () => {
     ])
   });
 
-  xit('story 2 started', () => {
+  it('story 2 started', () => {
     const state = rootReducer(initialState, tick(1001))
     expect(state.columns).toMatchObject([
-      {wip: 0, work: []},
-      {wip: 1, work: [{id: 1, 'dev': {total: 1000, done: 1}}]},
+      {name: 'todo', wip: 0, work: []},
+      {name: 'dev' , wip: 1, work: [{'dev': {total: 1000, done: 1}}]},
       {name: 'done', wip: 1, work: [{'dev': {total: 1000, done: 1000}}]}
     ])
   });
 
-  xit('end the simulation', () => {
+  it('end the simulation', () => {
     const state = rootReducer(initialState, tick(2000))
     expect(state.columns).toMatchObject([
       {wip: 0, work: []},
       {wip: 0, work: []},
-      {wip: 1, work: [{id: 1, 'dev': {total: 1000, done: 1000}}]}
+      {wip: 2, work: [{'dev': {total: 1000, done: 1000}}, {'dev': {total: 1000, done: 1000}}]}
     ])
   });
 });
